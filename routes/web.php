@@ -7,15 +7,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+->name('home')
+->middleware('verified');
 
-Auth::routes();
+Route::resource('tarefa', 'App\Http\Controllers\TarefaController')
+->middleware('verified');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::resource('tarefa', 'App\Http\Controllers\TarefaController');
 Route::get('/mensagem-teste', function() {
     return new MensagemTesteMail();
     //Mail::to('adriano.messias@conab.gov.br')->send(new MensagemTesteMail());

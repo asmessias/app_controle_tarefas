@@ -39,7 +39,7 @@ class RedefinirSenhaNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = 'http://localhost:8000/password/reset/'.$this->token.'?email='.$this->email;
+        $url = 'http://localhost/password/reset/'.$this->token.'?email='.$this->email;
         $minutos = config('auth.passwords.'.config('auth.defaults.passwords').'.expire');
         $saudacao = 'Olá '. $this->name;
 
